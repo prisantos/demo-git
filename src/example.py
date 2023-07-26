@@ -1,1 +1,2 @@
+"""Example"""
 print("Olá mundo!")

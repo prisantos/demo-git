@@ -29,14 +29,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install yapf pylama autoflake
 
-    - name: Find Python files # encontra todos os arquivos com extensão ".py" no repositório e salva no arquivo "python_files.txt"
-      id: find_files
+    - name: Formatting code with YAPF
       run: |
-        find . -name "*.py" > python_files.txt
-
-    - name: Formatting code with YAPF # formata o código Python nos arquivos listados em "python_files.txt" utilizando o YAPF.
-      run: |
-        yapf -i -r -p $(cat python_files.txt)
+        yapf -i -r -p .
 
     - name: Sorts imports with isort # instala o pacote isort e ordena as importações do código python.
       run: |
@@ -49,4 +44,4 @@ jobs:
 
     - name: Validating code with Pylama # executa a ferramenta pylama para validar o código nos arquivos listados em "python_files.txt"
       run: |
-        pylama $(cat python_files.txt)
+        pylama .

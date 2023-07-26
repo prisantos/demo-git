@@ -1,0 +1,18 @@
+# Arquivos de compilação e bytecode Python
+*.pyc
+__pycache__/
+
+# Arquivos temporários
+*.tmp
+*.log
+
+# Diretório de dependências e ambiente virtual Python
+venv/
+env/
+
+# Arquivos de configuração específicos do editor
+.vscode/
+.idea/
+
+# Arquivo de pre-commit
+.pre-commit-config.yaml

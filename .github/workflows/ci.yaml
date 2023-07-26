@@ -45,3 +45,8 @@ jobs:
     - name: Validating code with Pylama # executa a ferramenta pylama para validar o código nos arquivos listados em "python_files.txt"
       run: |
         pylama .
+
+    - name: Validating docstring with Interrogate
+      run: |
+        pip install interrogate
+        interrogate --fail-under 80

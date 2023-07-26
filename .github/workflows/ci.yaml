@@ -38,10 +38,6 @@ jobs:
         pip install isort
         isort .
 
-    - name: Remove unused imports with autoflake # remove as importações e variáveis não utilizadas com a ferramenta autoflake.
-      run: |
-        autoflake --in-place --remove-all-unused-imports --remove-unused-variables --recursive .
-
     - name: Validating code with Pylama # executa a ferramenta pylama para validar o código nos arquivos listados em "python_files.txt"
       run: |
         pylama .

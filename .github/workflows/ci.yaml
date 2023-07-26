@@ -1,0 +1,52 @@
+# Description: GitHub Actions workflow for formatting Python code using YAPF, validating with Pylama.
+name: CI # nome do fluxo
+
+on:
+  push: # quando houver um push será acionado para as branches "main" ou "dev"
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # informa qual ambiente o job será executado.
+
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9"] # executar o job em diferentes versões de python
+
+    steps:
+    - uses: actions/checkout@v2 # realiza o checkout do repositório atual. Isso garante que o código mais recente seja utilizado durante a execução do fluxo de trabalho.
+
+    - name: Set up Python ${{ matrix.python-version }} # configura o ambiente python especificado na matriz
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+
+    - name: Install dependencies # atualiza o gerenciador de pacotes pip para versão mais recente e instala as depedências necessárias para as etapas.
+      run: |
+        python -m pip install --upgrade pip
+        pip install yapf pylama autoflake
+
+    - name: Find Python files # encontra todos os arquivos com extensão ".py" no repositório e salva no arquivo "python_files.txt"
+      id: find_files
+      run: |
+        find . -name "*.py" > python_files.txt
+
+    - name: Formatting code with YAPF # formata o código Python nos arquivos listados em "python_files.txt" utilizando o YAPF.
+      run: |
+        yapf -i -r -p $(cat python_files.txt)
+
+    - name: Sorts imports with isort # instala o pacote isort e ordena as importações do código python.
+      run: |
+        pip install isort
+        isort .
+
+    - name: Remove unused imports with autoflake # remove as importações e variáveis não utilizadas com a ferramenta autoflake.
+      run: |
+        autoflake --in-place --remove-all-unused-imports --remove-unused-variables --recursive .
+
+    - name: Validating code with Pylama # executa a ferramenta pylama para validar o código nos arquivos listados em "python_files.txt"
+      run: |
+        pylama $(cat python_files.txt)

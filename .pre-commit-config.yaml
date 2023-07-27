@@ -1,0 +1,47 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks # repo que contêm os hooks pronto para uso
+    rev: v4.2.0
+    hooks:
+      - id: check-added-large-files # verifica se arquivos grandes estão sendo adicionados ao commit
+      - id: trailing-whitespace # remove espaços em branco ao final das linhas de código
+      - id: check-yaml # verifica se os arquivos YAML estão formatados corretamente
+      - id: check-merge-conflict # verifica se há conflitos de merge pendentes
+      - id: detect-private-key # verifica se há algum trecho do código que contém dados confidenciais (chaves e informações sensíveis)
+      - id: no-commit-to-branch # impede que o commit seja realizado diretamente na branch 'main'
+        args: ["--branch", "main"]
+      - id: end-of-file-fixer # garante que os arquivos terminem em uma nova linha
+
+  - repo: https://github.com/pre-commit/mirrors-yapf
+    rev: v0.29.0
+    hooks:
+      - id: yapf # formata o código Python usando o YAPF.
+        files: '\.py$' # será aplicado apenas nos arquivos ".py"
+        additional_dependencies:
+          - "yapf==0.29.0" # versão utilizada
+        args: ["--style", "{based_on_style: pep8, column_limit: 79}"] # argumentos de padronização
+
+  - repo: https://github.com/gvanderest/pylama-pre-commit
+    rev: 0.1.2
+    hooks:
+      - id: pylama
+        files: '\.py$'
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.11.5
+    hooks:
+      - id: isort # organizar as importações nos arquivos ".py"
+
+  - repo: https://github.com/myint/autoflake
+    rev: v1.4
+    hooks:
+      - id: autoflake # remove automaticamente importações não utilizadas
+        files: '\.py$' # será aplicado apenas nos arquivos ".py"
+
+        # --remove-all-unused-imports: Remove todas as importações não utilizadas nos arquivos.
+        # --ignore-init-module-imports: Ignora a remoção de importações não utilizadas nos arquivos "__init__.py".
+        args: ["--remove-all-unused-imports", "--ignore-init-module-imports"]
+
+  - repo: https://github.com/econchick/interrogate
+    rev: 1.4.0
+    hooks:
+      - id: interrogate

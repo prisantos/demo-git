@@ -13,6 +13,3 @@ env/
 # Arquivos de configuração específicos do editor
 .vscode/
 .idea/
-
-# Arquivo de pre-commit
-.pre-commit-config.yaml

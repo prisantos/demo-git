@@ -44,4 +44,4 @@ repos:
   - repo: https://github.com/econchick/interrogate
     rev: 1.4.0
     hooks:
-      - id: interrogate
+      - id: interrogate # verifica docstrings

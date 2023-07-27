@@ -34,7 +34,7 @@ jobs:
         pip install isort
         isort .
 
-    - name: Lint with Pylama # executa a ferramenta pylama para validar o código nos arquivos listados em "python_files.txt"
+    - name: Lint with Pylama # executa a ferramenta pylama para validar o código
       run: |
         pylama .
 

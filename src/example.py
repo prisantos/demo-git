@@ -1,19 +1,18 @@
 """Example"""
 
 
-def calculate_factorial(n):
-    """Calculate the factorial of a given integer.
+def calculate_circle_area(radius):
+    """Calculate the area of a circle.
 
-    This function takes an integer 'n' as input and calculates its factorial.
+    This function takes the radius of a circle as input and calculates its area.
 
     Parameters:
-        n (int): The integer for which the factorial needs to be calculated.
+        radius (float): The radius of the circle.
 
     Returns:
-        int: The factorial of the input integer 'n'.
+        float: The area of the circle.
 
     """
-    factorial = 1
-    for i in range(1, n + 1):
-        factorial *= i  # This is a long line of code that calculates the factorial of 'n'.
-    return factorial
+    pi = 3.14159265358979323846
+    area = pi * radius * radius  # This line calculates the area of the circle using the formula: area = π * radius^2.
+    return area

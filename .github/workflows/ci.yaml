@@ -29,10 +29,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install yapf pylama autoflake
 
-    - name: Formatting code with YAPF
-      run: |
-        yapf -i -r -p --style "{based_on_style: pep8, column_limit: 79}" .
-
     - name: Sorts imports with isort # instala o pacote isort e ordena as importações do código python.
       run: |
         pip install isort
